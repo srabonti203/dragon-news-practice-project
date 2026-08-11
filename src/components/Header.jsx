@@ -13,7 +13,6 @@ const Header = () => {
       ></Image>
       <p>Journalism Without Fear or Favour</p>
       <p>{format(new Date(), "EEEE, MMMM dd,yyyy")}</p>
-      <div>header</div>
     </div>
   );
 };

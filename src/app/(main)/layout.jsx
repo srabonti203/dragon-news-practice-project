@@ -5,7 +5,7 @@ import React from "react";
 
 const MainLayout = ({ children }) => {
   return (
-    <div>
+    <div className="flex flex-col items-center gap-5">
       <Header></Header>
       <BreakingNews></BreakingNews>
       <Navbar></Navbar>
