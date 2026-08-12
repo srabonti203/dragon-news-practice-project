@@ -51,13 +51,18 @@ const LoginPage = () => {
               id="password"
               className="input container"
               placeholder="Enter your password"
+              {...register("password")}
+              {...register("password", { required: "this field is required" })}
             />
+            {errors.password && (
+              <span className="text-red-600">{errors.password.message}</span>
+            )}
           </fieldset>
           <button className="btn bg-slate-900 text-white container mt-4 rounded-md">
             Login
           </button>
           <p className="text-center mt-4">
-            Don't have an account?
+            Dont have an account?
             <Link className="p-2 text-red-500" href={"/registration"}>
               Register
             </Link>
