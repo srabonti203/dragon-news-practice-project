@@ -1,4 +1,5 @@
 import LeftSideBar from "@/components/homepage/leftSidebar/LeftSideBar";
+import NewsCard from "@/components/homepage/middlePart/NewsCard";
 import RightSideBar from "@/components/homepage/rightSideBar/RightSideBar";
 import { fetchCatagories, fetchNews } from "@/lib/data";
 
@@ -24,15 +25,21 @@ const NewsDetails = async ({ params }) => {
       </div>
 
       {/* middle section */}
-      <div className="bg-amber-200 col-span-6">
-        <h2 className="text-lg text-center font-medium">News by Category</h2>
-        {allNews.length > 0 ? (
-          allNews.map((news) => <div key={news._id}>{news.title}</div>)
-        ) : (
-          <h2 className="flex items-center justify-center p-8 mt-30 text-2xl font-bold">
-            No News Found
-          </h2>
-        )}
+      <div className="col-span-6">
+        <h2 className="text-lg text-center font-medium">Dragon News Home</h2>
+
+        {/* newsCard */}
+        <div className="flex flex-col items-center justify-center gap-10">
+          {allNews.length > 0 ? (
+            allNews.map((news) => (
+              <NewsCard key={news._id} news={news}></NewsCard>
+            ))
+          ) : (
+            <h2 className="flex items-center justify-center p-8 mt-30 text-2xl font-bold">
+              No News Found
+            </h2>
+          )}
+        </div>
       </div>
 
       {/* left sidebar */}

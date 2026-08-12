@@ -13,7 +13,7 @@ const LeftSideBar = ({ newsCategories, activeId }) => {
           >
             <Link
               href={`${category.category_id}`}
-              className={`p-2 cursor-pointer w-full  rounded-md text-lg container block ${activeId == category.category_id && "bg-purple-300 text-white"}`}
+              className={`p-2 cursor-pointer w-full  rounded-md text-lg container block ${activeId == category.category_id && "bg-purple-300 text-gray-600"}`}
             >
               {category.category_name}
             </Link>
