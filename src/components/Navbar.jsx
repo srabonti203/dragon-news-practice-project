@@ -1,6 +1,7 @@
 import Image from "next/image";
 import avater from "@/assets/user.png";
 import NavLink from "./shared/NavLink";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
@@ -21,9 +22,11 @@ const Navbar = () => {
           alt="user-image"
           className=""
         ></Image>
-        <button className="btn bg-purple-500 text-white rounded-full">
-          Login
-        </button>
+        <Link href={"/login"}>
+          <button className="btn bg-purple-500 text-white rounded-full">
+            Login
+          </button>
+        </Link>
       </div>
     </div>
   );

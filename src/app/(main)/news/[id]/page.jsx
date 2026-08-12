@@ -12,7 +12,7 @@ const NewsDetailsPage = async ({ params }) => {
   console.log(id);
   const detailedNews = await fetchNewsDetail(id);
   console.log(detailedNews);
-  return (
+  return ( 
     <div>
       <h2 className="text-lg font-medium mb-3">Dragon News</h2>
       <div className="shadow-sm rounded-md p-4">
