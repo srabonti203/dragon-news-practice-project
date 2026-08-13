@@ -45,7 +45,6 @@ const LoginPage = () => {
               id="email"
               className="input container"
               placeholder="Enter your email address"
-              {...register("email")}
               {...register("email", { required: "this field is required" })}
             />
             {errors.email && (
@@ -63,11 +62,13 @@ const LoginPage = () => {
               id="password"
               className="input container"
               placeholder="Enter your password"
-              {...register("password")}
               {...register("password", { required: "this field is required" })}
             />
 
-            <span className="absolute right-3 top-12 text-lg" onClick={() => setShowPassword(!showPassword)}>
+            <span
+              className="absolute right-3 top-12 text-lg"
+              onClick={() => setShowPassword(!showPassword)}
+            >
               {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
             </span>
 

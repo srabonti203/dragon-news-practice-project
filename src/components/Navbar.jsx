@@ -4,7 +4,6 @@ import avater from "@/assets/user.png";
 import NavLink from "./shared/NavLink";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import { useState } from "react";
 
 const Navbar = () => {
   const { data: session } = authClient.useSession();
@@ -29,7 +28,7 @@ const Navbar = () => {
             width={40}
             height={40}
             alt="user image"
-            className="rounded-full"
+            className="w-10 h-10 rounded-full object-cover"
           ></Image>
           <Link href={"/login"}>
             <button

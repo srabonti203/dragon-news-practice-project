@@ -1,6 +1,6 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
@@ -12,6 +12,8 @@ const RegistrationPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const router = useRouter();
 
   const handleRegistration = async (data) => {
     // console.log(data);
@@ -29,6 +31,7 @@ const RegistrationPage = () => {
     }
     if (res) {
       alert("SignedUp successfully.");
+      router.push("/");
     }
   };
 
@@ -51,7 +54,6 @@ const RegistrationPage = () => {
               id="name"
               className="input container"
               placeholder="Enter your email address"
-              {...register("name")}
               {...register("name", { required: "this field is required" })}
             />
             {errors.name && (
@@ -67,7 +69,6 @@ const RegistrationPage = () => {
               id="photo"
               className="input container"
               placeholder="Enter your email address"
-              {...register("photo")}
               {...register("photo", { required: "this field is required" })}
             />
             {errors.photo && (
@@ -83,7 +84,6 @@ const RegistrationPage = () => {
               id="email"
               className="input container"
               placeholder="Enter your email address"
-              {...register("email")}
               {...register("email", { required: "this field is required" })}
             />
             {errors.email && (
@@ -101,7 +101,6 @@ const RegistrationPage = () => {
               id="password"
               className="input container"
               placeholder="Enter your password"
-              {...register("password")}
               {...register("password", { required: "this field is required" })}
             />
 
@@ -117,14 +116,8 @@ const RegistrationPage = () => {
             )}
           </fieldset>
           <button className="btn bg-slate-900 text-white container mt-4 rounded-md">
-            Login
+            Register
           </button>
-          <p className="text-center mt-4">
-            Dont have an account?
-            <Link className="p-2 text-red-500" href={"/registration"}>
-              Register
-            </Link>
-          </p>
         </form>
       </div>
     </div>
