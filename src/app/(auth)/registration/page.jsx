@@ -1,17 +1,35 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const RegistrationPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleRegistration = (data) => {
-    console.log(data);
+  const handleRegistration = async (data) => {
+    // console.log(data);
+    const { name, photo, email, password } = data;
+    const { data: res, error } = await authClient.signUp.email({
+      name: name,
+      email: email,
+      password: password,
+      image: photo,
+      callbackURL: "/",
+    });
+    console.log(res, error);
+    if (error) {
+      alert(error.message);
+    }
+    if (res) {
+      alert("SignedUp successfully.");
+    }
   };
 
   return (
@@ -42,6 +60,22 @@ const RegistrationPage = () => {
           </fieldset>
           <fieldset className="fieldset">
             <label className="label text-lg font-medium" htmlFor="name">
+              Your Photo
+            </label>
+            <input
+              type="text"
+              id="photo"
+              className="input container"
+              placeholder="Enter your email address"
+              {...register("photo")}
+              {...register("photo", { required: "this field is required" })}
+            />
+            {errors.photo && (
+              <span className="text-red-600">{errors.photo.message}</span>
+            )}
+          </fieldset>
+          <fieldset className="fieldset">
+            <label className="label text-lg font-medium" htmlFor="name">
               Email address
             </label>
             <input
@@ -57,19 +91,27 @@ const RegistrationPage = () => {
             )}
           </fieldset>
 
-          <fieldset className="fieldset">
+          <fieldset className="fieldset relative">
             <label className="label text-lg font-medium " htmlFor="name">
               Password
             </label>
             <input
               {...register("password")}
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               className="input container"
               placeholder="Enter your password"
               {...register("password")}
               {...register("password", { required: "this field is required" })}
             />
+
+            <span
+              className="absolute right-3 top-12 text-lg"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+            </span>
+
             {errors.password && (
               <span className="text-red-600">{errors.password.message}</span>
             )}

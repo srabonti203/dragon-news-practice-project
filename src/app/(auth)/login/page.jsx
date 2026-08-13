@@ -1,17 +1,29 @@
 "use client";
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const LoginPage = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleLogin = (data) => {
-    console.log(data);
+  const handleLogin = async (data) => {
+    // console.log(data);
+    const { email, password } = data;
+
+    const { data: res, error } = await authClient.signIn.email({
+      email: email, // required
+      password: password, // required
+      rememberMe: true,
+      callbackURL: "/",
+    });
+    console.log(res, error);
   };
 
   return (
@@ -41,23 +53,29 @@ const LoginPage = () => {
             )}
           </fieldset>
 
-          <fieldset className="fieldset">
+          <fieldset className="fieldset relative">
             <label className="label text-lg font-medium " htmlFor="name">
               Password
             </label>
             <input
               {...register("password")}
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               className="input container"
               placeholder="Enter your password"
               {...register("password")}
               {...register("password", { required: "this field is required" })}
             />
+
+            <span className="absolute right-3 top-12 text-lg" onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+            </span>
+
             {errors.password && (
               <span className="text-red-600">{errors.password.message}</span>
             )}
           </fieldset>
+
           <button className="btn bg-slate-900 text-white container mt-4 rounded-md">
             Login
           </button>
